@@ -71,12 +71,15 @@ Save the changes.
 
 ### Data Access
 
-Go to **Google Auth Platform → Data Access** and check that the listed scopes match exactly what Omni requests and what `privacy.html` describes. For example:
+Go to **Google Auth Platform → Data Access** and check that the listed scopes match what the local tokens were actually granted (checked locally on 2026-11-02) and what `privacy.html` describes:
 
-- `https://www.googleapis.com/auth/gmail.readonly` — **restricted** scope
-- `https://www.googleapis.com/auth/calendar.readonly` or `calendar.events` — **sensitive** scope
+- `https://www.googleapis.com/auth/gmail.readonly`: **restricted**. Used by GOG for all three accounts.
+- `https://www.googleapis.com/auth/calendar.events.owned`: **sensitive**. Used by the Hermes Google Workspace skill.
+- `openid`, `email`, `https://www.googleapis.com/auth/userinfo.email`: non-sensitive. Requested by GOG.
 
-Remove any scopes Omni doesn't use.
+Remove any other scopes (Drive, Docs, Sheets, Contacts, `gmail.send`, `gmail.modify`, full `calendar`).
+
+> **Re-authorizing the Hermes Google Workspace skill:** if you run its setup without `--services`, it requests *every* scope it supports, including `gmail.send`, `gmail.modify`, `drive`, `documents`, `spreadsheets`, and `contacts.readonly`. Always pass `--services calendar-write` (or the narrowest set you need), and update `privacy.html` before adding any new scope.
 
 ### Switch to In production
 
@@ -87,7 +90,8 @@ Go to **Google Auth Platform → Audience**:
 
 After publishing:
 
-- Re-authorize Omni (run its Google OAuth flow again) for each account. Refresh tokens issued while the app was in Testing still have the 7-day limit, but new ones issued in production don't.
+- Re-authorize Omni (run its Google OAuth flow again) for each account. Refresh tokens issued while the app was in Testing still have the 7-day limit, but new ones issued in production don't. Both GOG (Gmail) and the Hermes skill (Calendar) use the same OAuth client, so both need re-authorizing.
+- **UCLA Workspace account:** UCLA's Google Workspace admins control which third-party apps can access UCLA accounts, and may block unverified apps that request restricted scopes like `gmail.readonly`. If authorization fails for that account, that's the likely cause. Also check whether UCLA policy allows sending UCLA email content to third-party AI services.
 - Because Omni requests sensitive or restricted scopes and isn't verified, the consent screen will show **"Google hasn't verified this app"**. As the owner, you can click **Advanced → Go to Omni (unsafe)** to continue.
 
 ## Verifying domain ownership in Google Search Console

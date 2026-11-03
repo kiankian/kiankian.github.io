@@ -34,8 +34,8 @@
       <div class="container">
         <h1>Privacy Policy</h1>
         <p class="policy-meta">
-          Omni — Personal AI Assistant &middot; Effective
-          <mark class="review">[REVIEW: November 2, 2026]</mark>
+          Omni — Personal AI Assistant &middot; Effective November 2, 2026 &middot; Last updated
+          <mark class="review">[REVIEW: date this revision is published]</mark>
         </p>
       </div>
     </div>
@@ -51,7 +51,7 @@
               <li><a href="#google-data">Google user data Omni accesses</a></li>
               <li><a href="#google-use">How Google data is used</a></li>
               <li><a href="#limited-use">Limited Use disclosure</a></li>
-              <li><a href="#ai-providers">AI model providers</a></li>
+              <li><a href="#ai-providers">AI model provider</a></li>
               <li><a href="#other-services">Other services</a></li>
               <li><a href="#storage">Storage and security</a></li>
               <li><a href="#sharing">Sharing, selling, and advertising</a></li>
@@ -66,11 +66,10 @@
 
           <h2 id="overview">1. Overview</h2>
           <p>
-            Omni is a private personal AI assistant operated by
-            Kian (the "owner") for the owner's own use.
-            It runs on Hermes Agent (from Nous Research), installed on the owner's Mac mini.
-            Omni is not a public service. It has no user accounts or sign-ups, and it is
-            not offered to anyone else.
+            Omni is a private personal AI assistant operated by Kian (the "owner") for the
+            owner's own use. It runs on Hermes Agent (from Nous Research), installed on the
+            owner's Mac mini. Omni is not a public service. It has no user accounts or sign-ups,
+            and it is not offered to anyone else.
           </p>
           <p>
             This policy explains what data Omni accesses, especially data from Google APIs,
@@ -78,73 +77,84 @@
             and how access can be revoked and data deleted.
           </p>
           <p>
-            Every Google account connected to Omni belongs to the owner.
-            Emails and calendar events in those accounts can include information about other
-            people, such as senders, recipients, and event attendees. Omni processes that
-            information only as part of helping the owner, as described below.
+            Every Google account connected to Omni is one the owner personally uses: two personal
+            Gmail accounts and the owner's UCLA Google Workspace account. Emails and calendar
+            events in those accounts can include information about other people, such as
+            senders, recipients, and event attendees. Omni processes that information only as
+            part of helping the owner, as described below.
           </p>
           <p>
-            Omni does <strong>not</strong> keep all data on the Mac mini. Its AI reasoning uses
-            cloud-hosted models, and it communicates through cloud messaging services.
-            These are described in sections 5 and 6.
+            Omni does <strong>not</strong> keep all data on the Mac mini. Its AI reasoning uses a
+            cloud-hosted model, and it communicates through cloud services. These are described
+            in sections 5 and 6.
           </p>
 
           <h2 id="google-data">2. Google user data Omni accesses</h2>
           <p>
-            Omni connects to Google through OAuth 2.0. During the Google consent screen, the
-            owner grants Omni the following permissions (OAuth scopes):
+            Omni connects to Google through OAuth 2.0, using two local tools on the Mac mini:
+            the GOG command-line tool for Gmail, and Hermes Agent's Google Workspace skill for
+            Google Calendar. Both use the same OAuth client. Google data is fetched directly from
+            Google's APIs by these local tools. It is not fetched through any Nous-hosted connector.
+            The owner has granted the following permissions (OAuth scopes):
           </p>
           <ul class="scope-list">
             <li>
-              <strong>Gmail: read-only access</strong>
+              <strong>Gmail: read-only</strong>
               <code>https://www.googleapis.com/auth/gmail.readonly</code>
               <p>
-                Why: to read messages and their metadata (sender, subject, date, labels,
-                and body) so Omni can identify important messages, deadlines, and action
-                items for the owner. Omni does not send, delete, or modify email.
+                Granted for all three connected accounts. Why: to read messages and their
+                metadata (sender, subject, date, labels, and body) so Omni can identify important
+                messages, deadlines, and action items. Omni cannot send, delete, or modify email
+                with this permission.
               </p>
             </li>
             <li>
-              <strong>Google Calendar: read and create events</strong>
-              <mark class="review">[REVIEW: exact Calendar scope. Creating events needs <code>https://www.googleapis.com/auth/calendar.events</code> or the broader <code>https://www.googleapis.com/auth/calendar</code>.]</mark>
+              <strong>Google Calendar: events on calendars the owner owns</strong>
+              <code>https://www.googleapis.com/auth/calendar.events.owned</code>
+              <mark class="review">[REVIEW: which account(s) is Calendar connected for?]</mark>
               <p>
-                Why: to read calendar events (titles, times, locations, descriptions,
-                and attendees) so Omni can prepare daily briefings, flag conflicts, and
-                help with scheduling, and to create new events on the owner's calendar.
-                <mark class="review">[REVIEW: can Omni also edit or delete existing events? If so, say so here.]</mark>
+                Why: to read events so Omni can prepare daily briefings and flag conflicts, and to
+                create events when the owner explicitly asks. This permission technically allows
+                creating, changing, and deleting events on calendars the owner owns. Omni's rule is
+                to create events only on the owner's explicit request, and to ask the owner before
+                changing or deleting any existing event.
               </p>
             </li>
             <li>
               <strong>Basic account identity</strong>
-              <mark class="review">[REVIEW: list any of <code>openid</code>, <code>email</code>, <code>profile</code> that are requested, or delete this item.]</mark>
-              <p>Why: to tell which of the owner's connected Google accounts a request belongs to.</p>
+              <code>openid</code>, <code>email</code>,
+              <code>https://www.googleapis.com/auth/userinfo.email</code>
+              <p>Requested by the Gmail tool. Why: to tell which of the owner's Google accounts a request belongs to.</p>
             </li>
           </ul>
           <p>
-            Omni requests only the scopes it needs for these features. It does not access
-            other Google services, such as Drive, Contacts, or Photos.
-            <mark class="review">[REVIEW: confirm no other Google APIs are used.]</mark>
+            Omni has not been granted access to other Google services, such as Drive, Docs,
+            Sheets, Contacts, or Tasks. If Omni ever needs another permission, this policy will
+            be updated before it is requested.
           </p>
 
           <h2 id="google-use">3. How Google data is used</h2>
           <p>Omni uses Google user data only to provide user-facing features for the owner:</p>
           <ul>
-            <li>Summarizing the day's calendar events and important emails in daily briefings.</li>
+            <li>Summarizing calendar events and important emails in a daily morning briefing. The briefing only reads data. It does not change anything.</li>
             <li>Finding deadlines, requests, and action items in email and reminding the owner about them.</li>
             <li>Answering the owner's questions about their schedule or inbox.</li>
-            <li>Helping the owner plan and schedule their time, including creating calendar events.</li>
+            <li>Creating calendar events when the owner asks.</li>
             <li>
-              Turning deadlines or tasks found in email or calendar data into entries in
-              the owner's Notion workspace or Apple Reminders, when relevant.
-              <mark class="review">[REVIEW: confirm Omni does this; delete this item if not.]</mark>
+              Recording academic tasks and deadlines found in email in the owner's Notion workspace,
+              and creating Apple Reminders when the owner asks. Changing an official deadline or an
+              existing calendar event requires the owner's approval.
             </li>
           </ul>
           <p>
-            Google user data is not used for advertising, is not sold, and is not used to
-            build user profiles for any purpose other than helping the owner.
+            Google user data is not used for advertising, is not sold, and is not used to build
+            profiles for any purpose other than helping the owner.
           </p>
 
           <h2 id="limited-use">4. Limited Use disclosure</h2>
+          <p>
+            <mark class="review">[REVIEW — BLOCKING: as Omni is currently configured, this section is not accurate. Gmail and Calendar content is sent to a Nous Portal free-tier model without Privacy Mode, and Nous's Terms allow it to use such data for training (see section 5). Fix the inference setup, or stop sending Google data to that model, before you publish this section.]</mark>
+          </p>
           <p>
             Omni's use and transfer to any other app of information received from Google APIs
             will adhere to the
@@ -160,27 +170,51 @@
             </li>
             <li>Google user data is not used or transferred for serving advertisements, including retargeting or personalized ads.</li>
             <li>Google user data is not sold, and it is not used or transferred to determine creditworthiness or for lending purposes.</li>
-            <li>Google user data is not used to develop, improve, or train generalized or non-personalized AI or machine-learning models.</li>
+            <li>
+              Google user data is not used or transferred to develop, improve, or train generalized
+              or non-personalized AI or machine-learning models.
+              <mark class="review">[REVIEW — BLOCKING: not currently supportable; see section 5.]</mark>
+            </li>
             <li>
               No person other than the owner reads Google user data, except as needed for
               security purposes or to comply with applicable law.
             </li>
           </ul>
 
-          <h2 id="ai-providers">5. AI model providers</h2>
+          <h2 id="ai-providers">5. AI model provider</h2>
           <p>
-            Omni's reasoning uses large language models hosted in the cloud and accessed
-            through Nous Research. To summarize email, interpret calendar events, or answer
-            the owner's questions, Omni sends the relevant content to the model provider,
-            and that content can include excerpts of Gmail messages, calendar event details,
-            Notion content, reminders, messages, and stored memory. Processing happens on the
-            provider's infrastructure, not on the Mac mini.
+            Omni's reasoning uses a cloud-hosted language model accessed through
+            <a href="https://portal.nousresearch.com">Nous Portal</a> (Nous Research). To summarize
+            email, interpret calendar events, or answer the owner's questions, Omni sends the
+            relevant content to the model as part of its prompts. That content can include excerpts
+            of Gmail messages, calendar event details, Notion content, reminders, messages, and
+            stored memory. This processing happens on Nous's infrastructure and that of any model
+            provider Nous uses, not on the Mac mini.
           </p>
           <p>
-            <mark class="review">[REVIEW: name the provider(s) and endpoint actually used, e.g. Nous Portal / Nous API, and whether Nous routes requests to any other provider.]</mark>
+            Omni currently uses Nous Portal's free tier without a signed-in Nous account, with the
+            model <code>stepfun/step-3.7-flash:free</code>. Which upstream infrastructure or model
+            provider serves this model has not been independently verified.
           </p>
           <p>
-            <mark class="review">[REVIEW: state the provider's data-retention and model-training terms, based on its current terms of service and privacy policy. Under Google's policy, Google user data must not be used to train generalized AI models. Confirm the provider's terms allow this before you publish this page.]</mark>
+            Nous's <a href="https://portal.nousresearch.com/terms">Terms of Service</a> and
+            <a href="https://portal.nousresearch.com/privacy">Privacy Policy</a> (both last updated
+            September 28, 2026) allow Nous to store inference payloads, such as prompts and
+            outputs, and to use them for purposes including training, unless the user enables an
+            account setting called Privacy Mode. Privacy Mode is not enabled for Omni. Nous's
+            Privacy Policy also says prompts and outputs may be shared with third-party model
+            providers, which handle them under their own terms. Nous does not publish a fixed
+            retention period for inference payloads.
+          </p>
+          <p>
+            <strong>As a result, content Omni sends to the model, including Google user data, may
+            currently be stored by Nous or its model providers and may be used for AI training.</strong>
+            <mark class="review">[REVIEW — BLOCKING: decide how to fix this before publishing, e.g. sign in to a Nous account, turn on Privacy Mode, and choose a model whose provider's terms forbid training, or stop sending Google data to the model. Then rewrite this paragraph to describe the new setup.]</mark>
+          </p>
+          <p>
+            Separately, Hermes Agent sends usage metrics to Nous Research. According to Hermes's
+            documentation, these metrics include things like model names, token counts, and error
+            categories, and do not include prompts, responses, or message text.
           </p>
 
           <h2 id="other-services">6. Other services</h2>
@@ -189,20 +223,26 @@
             Each service handles data under its own privacy policy.
           </p>
 
-          <h3>Notion</h3>
+          <h3>Notion (through Nous)</h3>
           <p>
-            Omni reads and writes the owner's Notion workspace to organize UCLA schoolwork,
-            assignments, and deadlines. Content Omni writes to Notion, which may include
-            deadlines or tasks taken from email or calendar data, is stored on Notion's
-            servers.
+            Omni reads and writes the owner's Notion workspace to organize UCLA coursework,
+            assignments, and deadlines. This includes a Notion page called "Omni Context" that
+            holds ongoing academic context, which may include deadlines or tasks found in email.
+            Notion is connected through a Nous-hosted connector, so Notion content passes through
+            Nous's connector service. Under
+            <a href="https://portal.nousresearch.com/privacy">Nous's Privacy Policy</a>, Nous and its
+            integration providers receive and store the access credentials for that connection.
+            Notion stores the content on its own servers.
           </p>
 
           <h3>iMessage via Photon</h3>
           <p>
-            Omni sends and receives iMessages with the owner through Photon. Messages, which
-            may include briefings and summaries drawn from email or calendar data, pass
-            through Apple's iMessage service.
-            <mark class="review">[REVIEW: describe how Photon handles messages, e.g. whether they pass through Photon's servers or stay on the Mac mini, and link to Photon's privacy policy.]</mark>
+            Omni sends and receives iMessages with the owner through Photon's managed iMessage
+            service. Messages, which may include briefings and summaries drawn from email or
+            calendar data, pass through Photon's infrastructure and Apple's iMessage service.
+            See <a href="https://app.photon.codes/privacy-policy">Photon's Privacy Policy</a>.
+            <mark class="review">[REVIEW: confirm this is the policy that covers the Photon service you use.]</mark>
+            Only the owner's allowlisted contact can message Omni this way.
           </p>
 
           <h3>Telegram</h3>
@@ -211,50 +251,56 @@
             messages, which may include briefings and summaries drawn from email or calendar
             data, are sent through and stored on Telegram's servers under
             <a href="https://telegram.org/privacy">Telegram's Privacy Policy</a>. Telegram bot
-            chats are not end-to-end encrypted.
+            chats are not end-to-end encrypted. Only allowlisted users can message the bot.
           </p>
 
           <h3>Apple Reminders</h3>
           <p>
-            Omni creates and manages reminders on the owner's Mac. If iCloud sync is turned on
-            for Reminders, Apple also stores them in iCloud.
-            <mark class="review">[REVIEW: confirm.]</mark>
+            Omni creates reminders on the Mac mini through a local command-line tool when the owner
+            asks. If iCloud sync is turned on for Reminders, Apple also stores them in iCloud.
+            <mark class="review">[REVIEW: check System Settings → Apple Account → iCloud → Reminders, then state whether sync is on.]</mark>
           </p>
 
           <h2 id="storage">7. Storage and security</h2>
           <h3>OAuth credentials</h3>
           <p>
-            The OAuth client credentials and the access and refresh tokens Google issues to Omni
-            are stored on the owner's Mac mini.
-            <mark class="review">[REVIEW: describe where and how, e.g. a file in Hermes Agent's config directory with restricted permissions, or the macOS Keychain. Don't claim encryption unless you have confirmed it.]</mark>
-            They are never published, never included on this website, and never committed to
-            any source-code repository.
+            The Google Calendar token is stored in a file in Hermes Agent's data folder on the
+            Mac mini, readable only by the owner's macOS user account. The Gmail tool stores its
+            refresh tokens in the macOS Keychain. These credentials are never published, never
+            included on this website, and never committed to any source-code repository.
           </p>
 
           <h3>Personal data and memory</h3>
           <p>
-            Omni keeps persistent memory and conversation context so it can help over time.
-            This memory can include information taken from email, calendar, Notion, reminders,
-            and messages.
-            <mark class="review">[REVIEW: describe where memory and logs are stored (e.g. local files on the Mac mini) and whether any are stored in the cloud.]</mark>
-            Omni does not keep a full copy of the owner's mailbox or calendar.
-            <mark class="review">[REVIEW: confirm, or describe any caching.]</mark>
+            Omni fetches email and calendar data from Google when it needs it. It does not keep a
+            separate copy of the owner's mailboxes or calendars. However, excerpts and summaries of
+            that data can persist in:
           </p>
+          <ul>
+            <li>Omni's conversation history, stored in a local database on the Mac mini,</li>
+            <li>Omni's persistent memory files on the Mac mini,</li>
+            <li>outputs of scheduled tasks, such as the daily briefing, stored on the Mac mini,</li>
+            <li>application logs and local cache folders that can hold large tool outputs, on the Mac mini,</li>
+            <li>the owner's Notion workspace, including the "Omni Context" page, and</li>
+            <li>message history in Telegram and iMessage.</li>
+          </ul>
 
           <h3>Safeguards</h3>
           <p>
-            Only the owner has access to the Mac mini and the accounts connected to Omni.
-            <mark class="review">[REVIEW: confirm, and list only safeguards you actually use, e.g. FileVault disk encryption or a login password.]</mark>
-            Data sent to cloud services travels over their encrypted (HTTPS/TLS) connections.
-            No system is perfectly secure, and the owner cannot guarantee the security of
-            third-party services.
+            The Mac mini's disk is encrypted with FileVault. Hermes Agent asks for approval before
+            running risky commands, and scheduled tasks automatically refuse risky commands that
+            haven't been approved. Only allowlisted users can message Omni.
+            <mark class="review">[REVIEW: confirm who has physical and macOS-account access to the Mac mini, and whether it has a login password and auto-lock.]</mark>
+            Data sent to cloud services travels over encrypted (HTTPS/TLS) connections. No system
+            is perfectly secure, and the owner cannot guarantee the security of third-party
+            services.
           </p>
 
           <h2 id="sharing">8. Sharing, selling, and advertising</h2>
           <ul>
             <li>Omni does <strong>not</strong> sell any data.</li>
             <li>Omni does <strong>not</strong> use any data for advertising, and does not share data with advertisers or data brokers.</li>
-            <li>Omni does <strong>not</strong> use Google user data to train generalized AI or machine-learning models, and the owner does not train models with it.</li>
+            <li>The owner does not train AI models with Google user data. Third-party AI providers may, as explained in section 5.</li>
             <li>
               Data is shared only with the services described in sections 5 and 6, and only as
               needed to provide Omni's features to the owner, or when required by law.
@@ -262,13 +308,15 @@
           </ul>
 
           <h2 id="retention">9. Retention</h2>
-          <p>
-            Data stored on the Mac mini, such as memory and conversation history, is kept
-            until the owner deletes it.
-            <mark class="review">[REVIEW: state any automatic retention or cleanup that actually exists, or confirm there is none.]</mark>
-            Data held by third-party services (Nous Research, Notion, Photon, Telegram, Apple)
-            is retained under each service's own policy.
-          </p>
+          <ul>
+            <li>Omni does not automatically delete conversation history, memory, or scheduled-task outputs. They are kept on the Mac mini until the owner deletes them.</li>
+            <li>Application logs rotate automatically, so older log entries are overwritten over time.</li>
+            <li>
+              Data held by third parties (Nous Research, Notion, Photon, Telegram, Apple) is retained
+              under each service's own policy. Nous does not publish a fixed retention period for
+              inference payloads (see section 5).
+            </li>
+          </ul>
 
           <h2 id="revoke">10. Revoking access</h2>
           <p>Omni's access to a Google account can be revoked at any time:</p>
@@ -276,37 +324,47 @@
             <li>
               Go to <a href="https://myaccount.google.com/connections">myaccount.google.com/connections</a>
               (Google Account → Security → Your connections to third-party apps &amp; services),
-              select Omni <mark class="review">[REVIEW: the exact app name shown on the consent screen]</mark>,
-              and choose to delete all connections.
+              select Omni <mark class="review">[REVIEW: confirm the app name shown there and on the consent screen is "Omni"]</mark>,
+              and remove its access. Do this for each connected account.
             </li>
-            <li>Once access is revoked, Google invalidates the tokens issued to Omni for that account, and Omni can no longer read its Gmail or Calendar data.</li>
+            <li>
+              Because the Gmail and Calendar tools share one OAuth client, removing Omni's access to
+              an account ends both Gmail and Calendar access for that account.
+            </li>
+            <li>
+              From the Mac mini, the Hermes Google Workspace skill has a revoke command that revokes
+              the Calendar token with Google and deletes it. The Gmail tool's
+              <code>gog auth remove</code> command deletes a stored token from the Mac mini. Its
+              documentation does not say whether this also revokes access with Google, so access
+              should also be removed from the Google Account page above.
+            </li>
           </ul>
           <p>
-            Access to Notion, Photon, and Telegram can be revoked from each service's own
-            settings, for example by removing the Notion integration or deleting the Telegram bot.
+            Access to Notion can be revoked by disconnecting the Notion connector in Hermes or
+            removing the integration in Notion. Photon and Telegram access can be revoked from
+            each service, for example by deleting the Telegram bot.
           </p>
 
           <h2 id="deletion">11. Deleting data</h2>
           <p>To delete data Omni has stored:</p>
           <ul>
+            <li><strong>OAuth tokens:</strong> revoke access as described in section 10, which also deletes the Calendar token file from the Mac mini.</li>
+            <li><strong>Persistent memory:</strong> edit or delete Omni's memory files on the Mac mini.</li>
+            <li><strong>Conversation history:</strong> delete individual sessions, or prune old ones, with Hermes Agent's session commands.</li>
+            <li><strong>Scheduled-task outputs, logs, and caches:</strong> delete the corresponding folders in Hermes Agent's data folder on the Mac mini.</li>
+            <li><strong>Notion:</strong> delete the relevant pages, including "Omni Context", in Notion.</li>
+            <li><strong>Messages:</strong> delete chats in Telegram and Messages. Copies held by Telegram, Photon, or Apple are subject to their policies.</li>
             <li>
-              <strong>OAuth tokens:</strong> revoke access as described above, and delete the
-              token file(s) from the Mac mini.
-              <mark class="review">[REVIEW: give the path or method.]</mark>
-            </li>
-            <li>
-              <strong>Memory and history:</strong> delete Omni's memory and session files from the Mac mini.
-              <mark class="review">[REVIEW: give the location or command for Hermes Agent.]</mark>
-            </li>
-            <li>
-              <strong>Third-party copies:</strong> delete content directly in Notion, Telegram,
-              Messages, or Reminders. Data sent to the AI model provider is subject to that
-              provider's retention policy (see section 5).
+              <strong>Nous Research:</strong> content already sent to the model may have been retained
+              by Nous or its model providers, and the owner may not be able to delete it. Requests
+              can be sent to Nous at <a href="mailto:privacy@nousresearch.com">privacy@nousresearch.com</a>.
             </li>
           </ul>
           <p>
             Anyone whose information may have been processed by Omni (for example, someone who
-            emailed the owner) can ask for it to be deleted using the contact details below.
+            emailed the owner) can ask for it to be deleted using the contact details below. The
+            owner will delete what they control, but cannot guarantee deletion of copies held by
+            third parties.
           </p>
 
           <h2 id="website">12. This website</h2>
@@ -320,16 +378,15 @@
 
           <h2 id="changes">13. Changes to this policy</h2>
           <p>
-            This policy will be updated if Omni's data practices change, for example if it
-            requests new Google permissions or starts using a new service. The effective date
-            at the top of this page shows when it was last updated.
+            This policy will be updated if Omni's data practices change, for example if it requests
+            new Google permissions, changes AI provider or model, or starts using a new service.
+            The "Last updated" date at the top of this page shows when it last changed.
           </p>
 
           <h2 id="contact">14. Contact</h2>
           <p>
             For questions about this policy or requests about data Omni has processed, contact
-            Kian at
-            <a href="mailto:kianshandi@gmail.com">kianshandi@gmail.com</a>.
+            Kian at <a href="mailto:kianshandi@gmail.com">kianshandi@gmail.com</a>.
           </p>
 
         </div>
