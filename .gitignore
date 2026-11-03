@@ -1,0 +1,10 @@
+# Never commit secrets or personal data to this public site.
+.env
+.env.*
+*.pem
+*.key
+client_secret*.json
+credentials*.json
+token*.json
+*token*.pickle
+.DS_Store

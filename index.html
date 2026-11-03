@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Omni — Personal AI Assistant</title>
+  <meta name="description" content="Omni is a private, single-user AI assistant that helps its owner manage schoolwork, calendar, email, reminders, and messages. It is not a public service.">
+  <link rel="icon" type="image/png" href="logo-256.png">
+  <link rel="apple-touch-icon" href="logo-256.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="index.html">
+        <img class="brand-mark" src="logo-256.png" alt="" width="28" height="28">
+        Omni
+      </a>
+      <nav class="site-nav" aria-label="Primary">
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#capabilities">Capabilities</a></li>
+          <li><a href="#google">Google data</a></li>
+          <li><a href="privacy.html">Privacy Policy</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero">
+      <div class="container">
+        <img class="hero-logo" src="logo-256.png" alt="Omni logo" width="88" height="88">
+        <p class="eyebrow">Private &middot; Single-user &middot; Not a public service</p>
+        <h1>Omni <span>— Personal AI Assistant</span></h1>
+        <p class="lead">
+          Omni is a personal AI assistant that helps its owner keep track of
+          schoolwork, calendar events, important email, reminders, and messages,
+          and sends daily briefings and deadline reminders.
+        </p>
+        <div class="actions">
+          <a class="button button-primary" href="privacy.html">Read the Privacy Policy</a>
+          <a class="button" href="#contact">Contact</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="about" aria-labelledby="about-title">
+      <div class="container">
+        <h2 id="about-title">A private, self-hosted assistant</h2>
+        <div class="prose">
+          <p>
+            Omni is built and used by one person for their own personal use. It is
+            not a commercial product, it does not offer accounts or sign-ups, and it
+            is not available to anyone else. This website exists to describe what
+            Omni does and how it handles data.
+          </p>
+          <p>
+            Omni runs on <a href="https://github.com/NousResearch/hermes-agent">Hermes Agent</a>
+            (from Nous Research), installed on the owner's Mac mini. The agent,
+            its integrations, and some data processing run locally on that machine.
+            Omni's language-model reasoning, however, uses cloud-hosted models
+            provided through Nous Research, and Omni communicates through
+            cloud messaging services. So not all data stays on the Mac mini. The
+            <a href="privacy.html">Privacy Policy</a> explains exactly what is sent where.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="capabilities" aria-labelledby="capabilities-title">
+      <div class="container">
+        <h2 id="capabilities-title">Integrations and capabilities</h2>
+        <p class="section-intro">
+          Every integration is connected to the owner's own accounts, and
+          everything Omni does is for the owner.
+        </p>
+        <div class="grid">
+          <article class="card">
+            <span class="tag">Notion</span>
+            <h3>Schoolwork organization</h3>
+            <p>Keeps UCLA coursework, assignments, and due dates organized in the owner's Notion workspace.</p>
+          </article>
+          <article class="card">
+            <span class="tag">Google Calendar</span>
+            <h3>Schedule awareness</h3>
+            <p>Reviews upcoming events to summarize the day, and creates new events to help with scheduling.</p>
+          </article>
+          <article class="card">
+            <span class="tag">Gmail</span>
+            <h3>Inbox triage</h3>
+            <p>Reads the owner's authorized Gmail accounts to surface important messages, deadlines, and action items.</p>
+          </article>
+          <article class="card">
+            <span class="tag">Apple Reminders</span>
+            <h3>Reminders</h3>
+            <p>Creates and manages reminders on the owner's Mac.</p>
+          </article>
+          <article class="card">
+            <span class="tag">iMessage &amp; Telegram</span>
+            <h3>Messaging</h3>
+            <p>Sends and receives messages with the owner through iMessage (via Photon) and Telegram.</p>
+          </article>
+          <article class="card">
+            <span class="tag">Briefings &amp; memory</span>
+            <h3>Proactive help</h3>
+            <p>Sends daily briefings and deadline reminders, and keeps a persistent memory so it has the context it needs over time.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="google" aria-labelledby="google-title">
+      <div class="container">
+        <h2 id="google-title">How Omni uses Google Calendar and Gmail</h2>
+        <div class="prose">
+          <p>
+            The owner connects their own Google accounts to Omni through Google's
+            standard OAuth consent screen. Omni uses that access only to help the
+            owner:
+          </p>
+          <ul>
+            <li>
+              <strong>Google Calendar:</strong> Omni reads events to build daily briefings
+              and warn about conflicts, and it can create new events to help with scheduling.
+              <mark class="review">[REVIEW: can Omni also edit or delete existing events?]</mark>
+            </li>
+            <li>
+              <strong>Gmail:</strong> Omni reads messages to find what matters, such as deadlines,
+              requests, and action items, and summarizes them for the owner. It does
+              not send, delete, or modify email. Gmail access is read-only.
+            </li>
+          </ul>
+          <p>
+            Relevant parts of Calendar and Gmail data may be sent to a cloud-hosted
+            AI model so Omni can understand and summarize them, and summaries may be
+            delivered to the owner by iMessage or Telegram. Google data is never sold,
+            never used for advertising, and never used to train generalized AI models.
+            Access can be revoked at any time from the
+            <a href="https://myaccount.google.com/connections">Google Account connections page</a>.
+          </p>
+        </div>
+        <div class="callout">
+          <p>
+            Omni's use and transfer of information received from Google APIs adheres to the
+            <a href="https://developers.google.com/terms/api-services-user-data-policy">Google API Services User Data Policy</a>,
+            including the Limited Use requirements.
+          </p>
+          <p>Full details are in the <a href="privacy.html">Privacy Policy</a>.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact" aria-labelledby="contact-title">
+      <div class="container">
+        <h2 id="contact-title">Contact</h2>
+        <div class="prose">
+          <p>
+            Omni is operated by Kian.
+            For questions about Omni or its privacy practices, email
+            <a href="mailto:kianshandi@gmail.com">kianshandi@gmail.com</a>.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>Omni is a private, personal project. It is not affiliated with or endorsed by Google, Nous Research, Notion, Photon, Telegram, or Apple.</p>
+      <ul>
+        <li><a href="index.html" aria-current="page">Home</a></li>
+        <li><a href="privacy.html">Privacy Policy</a></li>
+        <li><a href="terms.html">Terms of Service</a></li>
+      </ul>
+    </div>
+  </footer>
+</body>
+</html>
